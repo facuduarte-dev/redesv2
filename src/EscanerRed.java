@@ -31,6 +31,8 @@ public class EscanerRed {
 
                 equipos.add(pc);
 
+                BaseDatos.guardarEquipo(pc);
+
             } else {
 
                 System.out.println("La IP " + ipActual + " no responde");

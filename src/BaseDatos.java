@@ -5,18 +5,23 @@ import java.sql.PreparedStatement;
 public class BaseDatos {
 
     private static final String URL = "jdbc:mariadb://localhost:3306/escaner_red";
-    private static final String USUARIO = "root";
-    private static final String PASSWORD = "";
+    private static final String USUARIO = "java";
+    private static final String PASSWORD = "1234";
 
     public static void guardarEquipo(Equipo equipo) {
 
-        try {
+        String sql = """
+                INSERT INTO equipos (ip, mac, activo)
+                VALUES (?, ?, ?)
+                ON DUPLICATE KEY UPDATE
+                    mac = VALUES(mac),
+                    activo = VALUES(activo)
+                """;
 
-            Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
-
-            String sql = "INSERT INTO equipos (ip, mac, activo) VALUES (?, ?, ?)";
-
-            PreparedStatement sentencia = conexion.prepareStatement(sql);
+        try (
+                Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+                PreparedStatement sentencia = conexion.prepareStatement(sql)
+        ) {
 
             sentencia.setString(1, equipo.getIp());
             sentencia.setString(2, equipo.getMac());
@@ -24,12 +29,11 @@ public class BaseDatos {
 
             sentencia.executeUpdate();
 
-            conexion.close();
-
-            System.out.println("Equipo guardado en la base de datos.");
+            System.out.println("Equipo guardado correctamente.");
 
         } catch (Exception e) {
 
+            System.out.println("Error al guardar el equipo en la base de datos.");
             e.printStackTrace();
 
         }
