@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Este proyecto fue desarrollado en Java como parte de la asignatura de Redes y Bases de Datos.
+Este proyecto fue desarrollado en Java para el parcial de la materia Redes
 
 La aplicación permite escanear una red local, detectar los equipos activos mediante ping, obtener su dirección MAC y almacenar la información en una base de datos MariaDB utilizando JDBC.
 
