@@ -1,19 +1,41 @@
-public class EscanerRed {
+import java.util.ArrayList;
+import java.net.InetAddress;
 
-    // Recibir la red a escanear.
+public class EscanerRed{
 
-    
+    private String red;
 
-    // Recorrer las direcciones IP del rango.
+    public EscanerRed(String red) throws Exception {
 
-    // Construir la IP completa (ej: 192.168.1.24).
+        this.red = red;
 
-    // Convertir el texto a un objeto InetAddress.
+        System.out.println("la red recibida es: " + red);
 
-    // Verificar si la IP responde al ping.
+        ArrayList<String> ipsActivas = new ArrayList<>();
 
-    // Si responde, crear un objeto Equipo y guardarlo en una lista.
+        for(int i = 1; i <= 20; i++){
 
-    // Devolver la lista de equipos encontrados.
+            String ipActual = red + "." + i;
 
-}
+            InetAddress ip = InetAddress.getByName(ipActual);
+            if(ip.isReachable(1000)){
+                System.out.println("La ip " + ipActual + " esta ACTIVA");
+                ipsActivas.add(ipActual);
+            }else{
+                System.out.println("La ip " + ipActual + " no responde");
+
+            }
+
+            
+
+         
+
+
+        }            System.out.println("\n===== IPs ACTIVAS ENCONTRADAS =====");
+
+           for (String ip : ipsActivas) {
+        System.out.println(ip);
+                }
+        }
+
+    }
