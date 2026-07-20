@@ -15,13 +15,13 @@ public class EscanerRed {
 
         ArrayList<Equipo> equipos = new ArrayList<>();
 
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 255; i++) {
 
             String ipActual = red + "." + i;
 
             InetAddress ip = InetAddress.getByName(ipActual);
 
-            if (ip.isReachable(1000)) {
+            if (ip.isReachable(9000)) {
 
                 System.out.println("La IP " + ipActual + " está ACTIVA");
 
